@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.VarChar(36)
+  email        String   @unique @db.VarChar(255)
+  passwordHash String?  @map("password_hash") @db.VarChar(255)
+  name         String?  @db.VarChar(255)
+  role         String   @default("admin") @db.VarChar(50)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model ReportRecord {
+  id                 String   @id @default(uuid()) @db.VarChar(36)
+  srNo               Int?     @map("sr_no")
+  studentName        String   @map("student_name") @db.VarChar(255)
+  studentId          String?  @map("student_id") @db.VarChar(100)
+  agent              String?  @db.VarChar(255)
+  scholarship        String?  @db.VarChar(100)
+  pendingInvoice     String?  @map("pending_invoice") @db.VarChar(100)
+  pendingAmount      Decimal? @default(0.00) @map("pending_amount") @db.Decimal(14, 2)
+  yetToRaised        String?  @map("yet_to_raised") @db.VarChar(100)
+  remarks            String?  @db.Text
+  dob                String?  @db.VarChar(50)
+  document           String?  @db.VarChar(255)
+  status             String?  @default("Current") @db.VarChar(100)
+  intake             String?  @db.VarChar(100)
+  endDate            String?  @map("end_date") @db.VarChar(100)
+  course             String?  @db.VarChar(255)
+  adminFee           Decimal? @default(0.00) @map("admin_fee") @db.Decimal(14, 2)
+  resourceFee        Decimal? @default(0.00) @map("resource_fee") @db.Decimal(14, 2)
+  tuitionFee         Decimal? @default(0.00) @map("tuition_fee") @db.Decimal(14, 2)
+  totalFee           Decimal? @default(0.00) @map("total_fee") @db.Decimal(14, 2)
+  paidAmount         Decimal? @default(0.00) @map("paid_amount") @db.Decimal(14, 2)
+  totalPaid          Decimal? @default(0.00) @map("total_paid") @db.Decimal(14, 2)
+  followUp           String?  @map("follow_up") @db.Text
+  coeIssuedDate      String?  @map("coe_issued_date") @db.VarChar(100)
+  emailId            String?  @map("email_id") @db.VarChar(255)
+  phoneNo            String?  @map("phone_no") @db.VarChar(100)
+  paymentStatus      String?  @default("Pending") @map("payment_status") @db.VarChar(100)
+  dividedMonth       Int?     @map("divided_month")
+  calculationBreakup String?  @map("calculation_breakup") @db.Text
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@index([studentName], map: "idx_report_records_student_name")
+  @@index([studentId], map: "idx_report_records_student_id")
+  @@index([agent], map: "idx_report_records_agent")
+  @@index([intake], map: "idx_report_records_intake")
+  @@index([course], map: "idx_report_records_course")
+  @@map("report_records")
+}
