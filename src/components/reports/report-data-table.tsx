@@ -290,6 +290,7 @@ export default function ReportDataTable({
             <option value="Course End">Course End</option>
             <option value="Payment Received">Payment Received</option>
             <option value="Defaulter">Defaulter</option>
+            <option value="Paid Agent">Paid Agent</option>
           </select>
 
           {/* Agent Filter */}
@@ -485,6 +486,7 @@ export default function ReportDataTable({
                             <option value="Course End">Course End</option>
                             <option value="Payment Received">Payment Received</option>
                             <option value="Defaulter">Defaulter</option>
+                            <option value="Paid Agent">Paid Agent</option>
                           </select>
                         ) : (
                           <Badge variant="outline" className="text-[11px] font-bold text-[#003D5C]">

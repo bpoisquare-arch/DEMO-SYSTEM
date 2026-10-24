@@ -455,6 +455,7 @@ export default function AddReportEntryModal({
                   <option value="Course End">Course End</option>
                   <option value="Payment Received">Payment Received</option>
                   <option value="Defaulter">Defaulter</option>
+                  <option value="Paid Agent">Paid Agent</option>
                 </select>
               </div>
 
